@@ -7,8 +7,6 @@ function generateReadme(answers) {
     return `
   # ${answers.title}
   
-  ${licenseBadges[answers.license]}
-  
   ## Description
   ${answers.description}
   
@@ -25,7 +23,7 @@ function generateReadme(answers) {
   ${answers.usage}
   
   ## Demo
-  ${answers.tests}
+  ${answers.demo}
   
   ## Questions
   If you have any questions, feel free to contact me:
@@ -33,7 +31,7 @@ function generateReadme(answers) {
   - Email: ${answers.email}
     `;
   }
-
+  
   // Array of questions for user input
 const questions = [
     {
@@ -61,21 +59,9 @@ const questions = [
       validate: input => input ? true : 'Please provide usage information.',
     },
     {
-      type: 'list',
-      name: 'license',
-      message: 'Choose a license for your project:',
-      choices: ['MIT', 'Apache', 'GPL', 'BSD'],
-    },
-    {
       type: 'input',
-      name: 'contributing',
-      message: 'Provide contribution guidelines:',
-      validate: input => input ? true : 'Please provide contribution guidelines.',
-    },
-    {
-      type: 'input',
-      name: 'tests',
-      message: 'Provide test instructions:',
+      name: 'demo',
+      message: 'Provide demo instructions:',
       validate: input => input ? true : 'Please provide test instructions.',
     },
     {
@@ -91,4 +77,22 @@ const questions = [
       validate: input => input ? true : 'Please provide your email address.',
     },
   ];
+
+  // Function to initialize app
+function init() {
+    inquirer.prompt(questions)
+      .then(answers => {
+        const readmeContent = generateReadme(answers);
+        fs.writeFileSync('README.md', readmeContent, (err) => {
+          if (err) throw err;
+          console.log('README.md has been successfully created!');
+        });
+        console.log('README.md generated successfully!');
+      })
+      .catch(err => {
+        console.error('Error generating README:', err);
+      });
+  }
   
+  // Call to initialize app
+  init();

@@ -1,5 +1,6 @@
-# READMEGenerator
 
+  # README Generator
+  
   ## Description
   A README Generator that uses Javascript, npm packages and file system to write a quality README for your personal or professional projects.
   
@@ -22,3 +23,4 @@
   If you have any questions, feel free to contact me:
   - GitHub: [JoseffJ](https://github.com/JoseffJ)
   - Email: joseffjarosz@gmail.com
+    
